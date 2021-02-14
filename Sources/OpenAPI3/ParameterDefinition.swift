@@ -87,7 +87,15 @@ struct ParameterDefinitionBuilder: Codable {
         self.explode = try values.decodeIfPresent(Bool.self, forKey: .explode)
         self.allowReserved = try values.decodeIfPresent(Bool.self, forKey: .allowReserved)
         self.schema = try values.decodeIfPresent(Reference<SchemaBuilder>.self, forKey: .schema)
-        self.example = try values.decodeIfPresent(String.self, forKey: .example)
+        if let stringValue = try? values.decodeIfPresent(String.self, forKey: .example) {
+            self.example = stringValue
+        }
+        if let intValue = try? values.decodeIfPresent(Int.self, forKey: .example) {
+            self.example = intValue
+        }
+        if let doubleValue = try? values.decodeIfPresent(Double.self, forKey: .example) {
+            self.example = doubleValue
+        }
         self.examples = try values.decodeIfPresent([String: Reference<ExampleBuilder>].self, forKey: .examples) ?? [:]
         self.content = try values.decodeIfPresent([String: MediaTypeBuilder].self, forKey: .content) ?? [:]
     }
