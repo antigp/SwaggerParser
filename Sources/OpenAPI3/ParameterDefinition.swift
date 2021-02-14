@@ -90,10 +90,10 @@ struct ParameterDefinitionBuilder: Codable {
         if let stringValue = try? values.decodeIfPresent(String.self, forKey: .example) {
             self.example = stringValue
         }
-        if let intValue = try? values.decodeIfPresent(Int.self, forKey: .example) {
+        if let intValueOptional = try? values.decodeIfPresent(Int.self, forKey: .example), let intValue = intValueOptional {
             self.example = String(intValue)
         }
-        if let doubleValue = try? values.decodeIfPresent(Double.self, forKey: .example) {
+        if let doubleValueOptional = try? values.decodeIfPresent(Double.self, forKey: .example), let doubleValue = doubleValueOptional {
             self.example = String(doubleValue)
         }
         self.examples = try values.decodeIfPresent([String: Reference<ExampleBuilder>].self, forKey: .examples) ?? [:]
