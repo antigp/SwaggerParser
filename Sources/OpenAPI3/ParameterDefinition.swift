@@ -91,10 +91,10 @@ struct ParameterDefinitionBuilder: Codable {
             self.example = stringValue
         }
         if let intValue = try? values.decodeIfPresent(Int.self, forKey: .example) {
-            self.example = intValue
+            self.example = String(intValue)
         }
         if let doubleValue = try? values.decodeIfPresent(Double.self, forKey: .example) {
-            self.example = doubleValue
+            self.example = String(doubleValue)
         }
         self.examples = try values.decodeIfPresent([String: Reference<ExampleBuilder>].self, forKey: .examples) ?? [:]
         self.content = try values.decodeIfPresent([String: MediaTypeBuilder].self, forKey: .content) ?? [:]
