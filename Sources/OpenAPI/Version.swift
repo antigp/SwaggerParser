@@ -27,6 +27,7 @@ public enum Version: Codable {
 
     public init(from decoder: Decoder) throws {
         let value = try decoder.singleValueContainer()
+        let string: String
         if let decodedDouble = try? value.decode(Double.self) {
             string = decodedDouble.description
          } else if let decodedFloat = try? value.decode(Float.self) {
